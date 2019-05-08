@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  spring-postgres-db:
+    image: postgres:alpine
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: spring
+      POSTGRES_USER: spring
+      POSTGRES_PASSWORD: spring
+
+  spring-transfer:
+    image: transfer-spring:latest
+    ports:
+    - 8081:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://spring-postgres-db:5432/spring
+    depends_on:
+      - spring-postgres-db
