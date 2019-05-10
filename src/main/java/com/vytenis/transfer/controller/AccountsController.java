@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,6 +24,7 @@ public class AccountsController {
 
     @GetMapping("/{userId}")
     public List<Account> getAccounts(@PathVariable("userId") Long userId) {
+        System.out.println(new SimpleDateFormat("HH:mm:ss.SSS").format(new Date()));
         User user = userService.getUser(userId);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
